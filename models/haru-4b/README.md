@@ -59,6 +59,7 @@ huggingface-cli download Jayanth-MKV/Haru-4B-GGUF qwen-haru-q4_k_m.gguf --local-
 ---
 
 ## 📖 Deep Dive Documentation
+- [Open-Source Contribution Plan & Quantization Roadmap](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/OPEN_SOURCE_CONTRIBUTION_PLAN.md)
 - [Architecture Deep Dive](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/ARCHITECTURE_DEEP_DIVE.md)
 - [Linode CPU Feasibility & Bandwidth Analysis](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/LINODE_CPU_FEASIBILITY.md)
 - [Open Source Pull Request Roadmap](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/PR_STRATEGY.md)

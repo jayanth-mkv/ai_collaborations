@@ -45,6 +45,7 @@ Every model in this lab follows an isolated, standardized workflow under `models
 ---
 
 ## 📖 Deep Dives & Documentation
+* [Open-Source Contribution Plan & Quantization Roadmap](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/OPEN_SOURCE_CONTRIBUTION_PLAN.md) — Comprehensive plan for upstream PRs (Haru & llama.cpp) and dual runtime packaging.
 * [Haru-4B Architecture Deep Dive](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/ARCHITECTURE_DEEP_DIVE.md) — Mathematical tensor breakdown & 133 ms streaming loop.
 * [Memory Bandwidth & CPU Feasibility Analysis](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/LINODE_CPU_FEASIBILITY.md) — The physics of DDR memory bandwidth in full-duplex speech.
 * [Open Source PR Strategy](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/PR_STRATEGY.md) — Upstream integration roadmap for Haru, llama.cpp, and Hugging Face.
