@@ -35,9 +35,9 @@ ai_collaborations/
 
 ## 🔬 Model Catalog
 
-| Model Name | Category | Base Architecture | Param Count | Quantization Strategy | Target Hardware | Documentation Link |
+| Model Name | Category | Base Architecture | Param Count | Quantization Strategy | Target Hardware | Documentation & Model Hub |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Haru-4B** (`higurashi-ai/Haru-4B`) | Spoken Dialogue (LSLM) | Qwen3.5-4B + VibeVoice + MeanFlow | 5.27B Total (4.2B LM + 687M Codec + 363M Head) | Hybrid: GGUF Q4_K_M for LM, FP16 for Codec & Head | 16c Dedicated CPU (EPYC), Apple Silicon, or GPU | [Haru-4B README](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/README.md) |
+| **Haru-4B** (`higurashi-ai/Haru-4B`) | Spoken Dialogue (LSLM) | Qwen3.5-4B + VibeVoice + MeanFlow | 5.27B Total (4.2B LM + 687M Codec + 363M Head) | Hybrid: GGUF Q4_K_M for LM, FP16 for Codec & Head | 16c Dedicated CPU (EPYC), Apple Silicon, or GPU | [Haru-4B README](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/README.md) · [HF Hub: Jayanth-MKV/Haru-4B-GGUF](https://huggingface.co/Jayanth-MKV/Haru-4B-GGUF) |
 
 ---
 

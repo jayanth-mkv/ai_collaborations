@@ -47,7 +47,7 @@ def find_best_target(target_preference: str = "gpu"):
     # Preferred regions in order of proximity & latency
     candidate_regions = ["in-bom-2", "in-maa", "sg-sin-2", "de-fra-2", "gb-lon", "us-iad-2", "us-ord"]
     gpu_plans = ["g2-gpu-rtx4000a1-s", "g2-gpu-rtx4000a1-m", "g1-gpu-rtx6000-1"]
-    cpu_plans = ["g6-dedicated-16", "g6-dedicated-8", "g6-dedicated-4"]
+    cpu_plans = ["g6-dedicated-4", "g6-dedicated-2", "g6-standard-4", "g6-standard-2"]
 
     if target_preference == "gpu":
         print("Checking GPU availability across candidate regions...")

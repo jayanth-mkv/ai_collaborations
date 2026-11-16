@@ -4,6 +4,21 @@
 
 ---
 
+## 🌟 Official Hugging Face Quantized Release
+The quantized model weights and FP16 modular artifacts are published and linked directly to the upstream model:
+- **Hugging Face Model Hub:** [Jayanth-MKV/Haru-4B-GGUF](https://huggingface.co/Jayanth-MKV/Haru-4B-GGUF)
+- **Base Model Linked:** [`higurashi-ai/Haru-4B`](https://huggingface.co/higurashi-ai/Haru-4B) (specifying `base_model: higurashi-ai/Haru-4B` and `pipeline_tag: audio-to-audio`)
+- **Backbone Format:** GGUF `Q4_K_M` (2.6 GB, down from 8.4 GB BF16)
+- **Audio Codec:** VibeVoice causal 1D conv tokenizer (`vibevoice-codec-f16.safetensors`, 1.3 GB)
+- **Acoustic Head:** MeanFlow 1-step ODE velocity predictor (`meanflow-head-f16.safetensors`, 694 MB)
+
+```bash
+# Download the GGUF model directly via huggingface-cli
+huggingface-cli download Jayanth-MKV/Haru-4B-GGUF qwen-haru-q4_k_m.gguf --local-dir .
+```
+
+---
+
 ## 📑 Directory Structure
 
 ```text
