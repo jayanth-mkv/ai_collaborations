@@ -1,0 +1,61 @@
+{
+  "study": "haru-4b-gguf-quantization",
+  "run_date": "2026-11-16",
+  "sources": {
+    "bytes": "Hugging Face tree API, upstream higurashi-ai/Haru-4B and our published GGUF repo, read 2026-11-17",
+    "params": "scripts/inspect_model.py safetensors header scan",
+    "tok_s": "llama-cli runs noted in docs/QUANTIZATION_WALKTHROUGH.md (4-core AMD EPYC Linode, -t 4; Colab T4, -ngl 99); raw logs not kept"
+  },
+  "rows": [
+    {
+      "id": "upstream",
+      "size_gb": 10.54,
+      "bytes": 10540113510,
+      "params_b": 5.27,
+      "share_params_pct": 100.0,
+      "bits_per_weight": 16.0,
+      "tok_s_cpu4": null,
+      "tok_s_t4": null
+    },
+    {
+      "id": "bundle",
+      "size_gb": 4.84,
+      "bytes": 4842894754,
+      "params_b": 5.27,
+      "share_params_pct": 100.0,
+      "bits_per_weight": 7.35,
+      "tok_s_cpu4": null,
+      "tok_s_t4": null
+    },
+    {
+      "id": "backbone_q4km",
+      "size_gb": 2.74,
+      "bytes": 2741233792,
+      "params_b": 4.21,
+      "share_params_pct": 79.9,
+      "bits_per_weight": 5.21,
+      "tok_s_cpu4": 8.4,
+      "tok_s_t4": 68.2
+    },
+    {
+      "id": "codec_f16",
+      "size_gb": 1.37,
+      "bytes": 1374842938,
+      "params_b": 0.687,
+      "share_params_pct": 13.0,
+      "bits_per_weight": 16.01,
+      "tok_s_cpu4": null,
+      "tok_s_t4": null
+    },
+    {
+      "id": "head_f16",
+      "size_gb": 0.73,
+      "bytes": 726818024,
+      "params_b": 0.363,
+      "share_params_pct": 6.9,
+      "bits_per_weight": 16.02,
+      "tok_s_cpu4": null,
+      "tok_s_t4": null
+    }
+  ]
+}
