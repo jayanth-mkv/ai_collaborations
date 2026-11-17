@@ -45,6 +45,7 @@ Every model in this lab follows an isolated, standardized workflow under `models
 ---
 
 ## 📖 Deep Dives & Documentation
+* [Haru-4B Quantization Walkthrough](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/QUANTIZATION_WALKTHROUGH.md) — Complete engineering steps, tools used, and reproduction cheat sheet.
 * [Haru-4B Architecture Deep Dive](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/ARCHITECTURE_DEEP_DIVE.md) — Mathematical tensor breakdown & 133 ms streaming loop.
 * [Cascaded Turn-Based CPU Fallback](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/CASCADED_CPU_FALLBACK.md) — Turn-based fallback pipeline for low-power CPUs.
 * [Shared Quantization Utilities](file:///D:/PROJECTS/jay/ai_collaborations/shared/quant_utils.py) — Bandwidth and memory calculators for LLM and speech architectures.

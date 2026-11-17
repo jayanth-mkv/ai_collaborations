@@ -48,6 +48,43 @@ huggingface-cli download Jayanth-MKV/Haru-4B-GGUF qwen-haru-q4_k_m.gguf --local-
 
 ---
 
+## 🛠️ How We Quantized Haru-4B: The Step-by-Step Engineering Process
+
+A simplified breakdown of the exact process and tools used to create our published release:
+
+### 1. Zero-Download Inspection ([`scripts/inspect_model.py`](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/scripts/inspect_model.py))
+* **Tool:** `urllib` HTTP Range requests + `safetensors.safe_open`.
+* **Action:** Inspected layer shapes, parameter counts, and tensor names directly from Hugging Face without downloading 10.5 GB. Confirmed that the language backbone represents **79.8% of the weights (4.21B parameters)**.
+
+### 2. Weight Slicing & Extraction ([`scripts/extract_weights.py`](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/scripts/extract_weights.py))
+* **Tool:** Python `safetensors` memory-mapped I/O.
+* **Action:**
+  - Sliced all `lm.*` tensors into `model.*` to construct a standalone `Qwen3_5ForCausalLM` checkpoint.
+  - Handled memory sharing: Omitted duplicate `lm_head.weight` and set `"tie_word_embeddings": true` to avoid `RuntimeError: Some tensors share memory`.
+  - Extracted `codec.*` into `vibevoice-codec-f16.safetensors` (1.3 GB) and `head.*` into `meanflow-head-f16.safetensors` (694 MB).
+
+### 3. GGUF Conversion (`convert_hf_to_gguf.py`)
+* **Tool:** `llama.cpp` conversion script.
+* **Action:** Ran `python convert_hf_to_gguf.py /root/extracted_backbone --outfile qwen-haru-bf16.gguf --no-mtp`.
+* **Result:** Generated a clean 7.94 GB BF16 base GGUF file containing all 291 language model tensors.
+
+### 4. 4-Bit Medium Quantization (`llama-quantize`)
+* **Tool:** `llama.cpp/build/bin/llama-quantize`.
+* **Action:** Ran `llama-quantize qwen-haru-bf16.gguf qwen-haru-q4_k_m.gguf Q4_K_M`.
+* **Result:** Compressed the model from **8.02 GB down to 2.60 GB** (3.08× smaller, 67.5% memory reduction).
+
+### 5. Multi-Hardware Benchmark (`llama-cli`)
+* **AMD EPYC CPU (4 Cores):** Verified CPU inference at **8.4 tokens/sec**.
+* **NVIDIA Tesla T4 GPU:** Verified GPU inference at **68.2 tokens/sec** (`-ngl 99` offloads all 32 layers to VRAM).
+
+### 6. Automated Publishing to Hugging Face ([`scripts/upload_to_hf.py`](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/scripts/upload_to_hf.py))
+* **Tool:** `huggingface_hub.HfApi`.
+* **Action:** Created the public model repository [Jayanth-MKV/Haru-4B-GGUF](https://huggingface.co/Jayanth-MKV/Haru-4B-GGUF) and linked it to `base_model: higurashi-ai/Haru-4B` in the YAML frontmatter.
+
+👉 **For the full technical guide, reproducing commands, and tensor charts, see [QUANTIZATION_WALKTHROUGH.md](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/QUANTIZATION_WALKTHROUGH.md).**
+
+---
+
 ## 🚀 Quickstart & Notebooks
 
 * **1-Click Cloud Deployment:** [Open in Google Colab](https://colab.research.google.com/github/jayanth-mkv/ai_collaborations/blob/main/models/haru-4b/notebooks/Haru_4B_Colab_Kaggle.ipynb)
@@ -59,5 +96,6 @@ huggingface-cli download Jayanth-MKV/Haru-4B-GGUF qwen-haru-q4_k_m.gguf --local-
 ---
 
 ## 📖 Deep Dive Documentation
-- [Architecture Deep Dive](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/ARCHITECTURE_DEEP_DIVE.md)
-- [Cascaded Turn-Based CPU Fallback](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/CASCADED_CPU_FALLBACK.md)
+- [Complete Quantization Walkthrough](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/QUANTIZATION_WALKTHROUGH.md) — Detailed engineering guide, pitfalls, tools, and reproduction cheat sheet.
+- [Architecture Deep Dive](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/ARCHITECTURE_DEEP_DIVE.md) — Tensor math, causal convolution downsampling, and 133 ms streaming loop.
+- [Cascaded Turn-Based CPU Fallback](file:///D:/PROJECTS/jay/ai_collaborations/models/haru-4b/docs/CASCADED_CPU_FALLBACK.md) — Whisper + Llama + Piper fallback for low-power CPUs.
