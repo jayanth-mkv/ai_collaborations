@@ -47,6 +47,13 @@ models/**/*.bin
 models/**/*.gguf
 models/**/*.pt
 
+# Private & Internal Dev Docs (Local only: You & Antigravity)
+internal/
+**/internal/
+docs/internal/
+*.internal.md
+*.private.md
+
 # Audio & Media Test Outputs
 *.wav
 *.mp3
